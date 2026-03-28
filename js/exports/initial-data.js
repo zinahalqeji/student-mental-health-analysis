@@ -1,19 +1,15 @@
 dbQuery.use('student-depression');
 
-//  Load dataset
-export let students = await dbQuery(`
-  SELECT * FROM student_depression
-`);
+export let students = await dbQuery('SELECT * FROM student_depression');
 
-//  Load descriptions
 export let fieldDescriptions = await jload('json/field-descriptions.json');
 
-//  Intro text
 export let initialComments = `
-# Student Depression Dataset
+This project analyzes student mental health in relation to lifestyle,
+academic pressure, workload, and personal background factors.
 
-- Total students: ${students.length}
-- Dataset includes academic, lifestyle, and mental health factors.
-
-This project explores how different factors affect depression.
+- Dataset: university students in India
+- Target variable: depression (Yes/No)
+- Key factors: sleep duration, academic pressure, work/study hours,
+  dietary habits, financial stress, family history, CGPA.
 `;

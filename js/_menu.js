@@ -4,8 +4,10 @@ createMenu('Student Mental Health Analysis', [
   { name: 'Analysis', sub: [
     { name: 'Sleep Analysis', script: 'sleep-analysis.js' },
     { name: 'Academic Pressure', script: 'pressure-analysis.js' },
-    { name: 'Work Hours', script: 'work-analysis.js' }
+    { name: 'Work/Study Hours', script: 'work-analysis.js' }
   ]},
+
+  { name: 'Data Dictionary', script: 'data-dictionary.js' },
 
   { name: 'Conclusion', script: 'conclusion.js' }
 ]);

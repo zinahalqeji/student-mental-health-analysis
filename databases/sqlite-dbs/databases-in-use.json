@@ -1,0 +1,7 @@
+[
+  {
+    "name": "student-depression",
+    "type": "sqlite",
+    "file": "student_depression.sqlite3"
+  }
+ ]

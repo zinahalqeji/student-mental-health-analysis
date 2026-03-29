@@ -10,4 +10,5 @@ createMenu('Student Mental Health Analysis', [
   { name: 'Data Dictionary', script: 'data-dictionary.js' },
 
   { name: 'Conclusion', script: 'conclusion.js' }
+  
 ]);

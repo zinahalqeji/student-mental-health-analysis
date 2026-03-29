@@ -12,13 +12,15 @@ depression rates across different workload levels.
 
 //  FILTER VALID DATA
 
-const validWork = students.filter(s => s.workStudyHours !== null);
+const validPressure = students.filter(s => 
+  s.academicPressure !== null && !isNaN(s.academicPressure)
+);
 
 
 //  PREPARE ARRAYS FOR CORRELATION
 
-const hours = validWork.map(s => s.workStudyHours);
-const depBinary = validWork.map(s => s.depression === "Yes" ? 1 : 0);
+const hours = validPressure.map(s => s.workStudyHours);
+const depBinary = validPressure.map(s => s.depression === "Yes" ? 1 : 0);
 
 addMdToPage(`
 ## Descriptive Statistics
@@ -50,10 +52,27 @@ studying tend to report depression slightly more often. The relationship is not
 strong, but it is noticeable.
 `);
 
+addMdToPage(`
+## Hypothesis Test
+
+**H₀ (Null Hypothesis):** There is no relationship between work/study hours and depression  
+**H₁ (Alternative Hypothesis):** There is a relationship between work/study hours and depression  
+
+The calculated correlation is **${corrWork.toFixed(3)}**.
+
+This value indicates a **weak positive relationship** between the variables.  
+Since the correlation is not equal to zero, there is evidence of an association.
+
+However, correlation alone is not sufficient to determine statistical significance.  
+A formal hypothesis test using a p-value would be required to confidently reject the null hypothesis.
+
+**Conclusion:**  
+There are indications of a relationship, but further statistical testing is needed to confirm it.
+`);
 
 //  SCATTER PLOT WITH TRENDLINE
 
-const scatterRows = validWork.map(s => ({
+const scatterRows = validPressure.map(s => ({
   workStudyHours: s.workStudyHours,
   depression: s.depression === "Yes" ? 1 : 0
 }));
@@ -89,7 +108,7 @@ const categories = [
 ];
 
 const grouped = categories.map(cat => {
-  const subset = validWork.filter(s =>
+  const subset = validPressure.filter(s =>
     s.workStudyHours >= cat.min && s.workStudyHours <= cat.max
   );
 

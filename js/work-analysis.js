@@ -22,6 +22,18 @@ const validPressure = students.filter(s =>
 const hours = validPressure.map(s => s.workStudyHours);
 const depBinary = validPressure.map(s => s.depression === "Yes" ? 1 : 0);
 
+let test = stdLib.stats.shapiroWilkTest(hours);
+
+addMdToPage(`
+## Normal Distribution Test
+
+p-value: ${test.p.toFixed(4)}
+
+${test.p < 0.05 
+  ? "Data is NOT normally distributed" 
+  : "Data is approximately normally distributed"}
+`);
+
 addMdToPage(`
 ## Descriptive Statistics
 

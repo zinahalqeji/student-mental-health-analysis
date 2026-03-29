@@ -8,7 +8,9 @@ Academic pressure is numeric, which allows us to compute averages and correlatio
 `);
 
 // Filter out missing values
-const validPressure = students.filter(s => s.academicPressure !== null);
+const validPressure = students.filter(s => 
+  s.academicPressure !== null && !isNaN(s.academicPressure)
+);
 
 // Prepare arrays for correlation
 const pressure = validPressure.map(s => s.academicPressure);

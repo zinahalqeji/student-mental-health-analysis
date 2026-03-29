@@ -9,7 +9,7 @@ addMdToPage(initialComments);
 //
 let total = students.length;
 let depressedCount = students.filter(s => s.depression === "Yes").length;
-let depressedPercent = depressedCount / total;
+let depressedPercent = (depressedCount / total) * 100;
 
 addMdToPage(`## Dataset Summary`);
 

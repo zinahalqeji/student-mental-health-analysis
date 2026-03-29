@@ -9,20 +9,28 @@ which allows us to compute correlations, visualize patterns, and compare
 depression rates across different workload levels.
 `);
 
-//
-// 1. FILTER VALID DATA
-//
+
+//  FILTER VALID DATA
+
 const validWork = students.filter(s => s.workStudyHours !== null);
 
-//
-// 2. PREPARE ARRAYS FOR CORRELATION
-//
+
+//  PREPARE ARRAYS FOR CORRELATION
+
 const hours = validWork.map(s => s.workStudyHours);
 const depBinary = validWork.map(s => s.depression === "Yes" ? 1 : 0);
 
-//
-// 3. CORRELATION
-//
+addMdToPage(`
+## Descriptive Statistics
+
+Mean hours: ${s.mean(hours).toFixed(2)}  
+Median hours: ${s.median(hours)}  
+Std deviation: ${s.standardDeviation(hours).toFixed(2)}
+`);
+
+
+//  CORRELATION
+
 const corrWork = s.sampleCorrelation(hours, depBinary);
 
 addMdToPage(`
@@ -35,9 +43,9 @@ studying tend to report depression slightly more often. The relationship is not
 strong, but it is noticeable.
 `);
 
-//
-// 4. SCATTER PLOT WITH TRENDLINE
-//
+
+//  SCATTER PLOT WITH TRENDLINE
+
 const scatterRows = validWork.map(s => ({
   workStudyHours: s.workStudyHours,
   depression: s.depression === "Yes" ? 1 : 0
@@ -61,9 +69,9 @@ different work/study hour levels. The red trendline highlights the overall
 direction of the relationship.
 `);
 
-//
-// 5. GROUPED ANALYSIS (VG-LEVEL)
-//
+
+//  GROUPED ANALYSIS
+
 addMdToPage(`## Depression Rate by Workload Category`);
 
 const categories = [
@@ -88,12 +96,14 @@ const grouped = categories.map(cat => {
 });
 
 // TABLE — full grouped data
+
 tableFromData({
   data: grouped,
   numberFormatOptions: { maximumFractionDigits: 3 }
 });
 
 // CHART — only DepressionRate
+
 const chartGrouped = grouped.map(r => ({
   WorkloadCategory: r.WorkloadCategory,
   DepressionRate: r.DepressionRate
@@ -117,9 +127,9 @@ intensity may contribute to mental strain, although the relationship is not
 definitive.
 `);
 
-//
-// 6. INTERPRETATION
-//
+
+//  INTERPRETATION
+
 addMdToPage(`
 ---
 

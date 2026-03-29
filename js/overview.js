@@ -4,9 +4,9 @@ addMdToPage(`# Overview`);
 
 addMdToPage(initialComments);
 
-//
+
 // BASIC SUMMARY
-//
+
 let total = students.length;
 let depressedCount = students.filter(s => s.depression === "Yes").length;
 let depressedPercent = (depressedCount / total) * 100;
@@ -21,9 +21,9 @@ tableFromData({
   numberFormatOptions: { maximumFractionDigits: 3 }
 });
 
-//
+
 // HELPER: COUNT VALUES
-//
+
 function countValues(key) {
   let counts = {};
   for (let s of students) {

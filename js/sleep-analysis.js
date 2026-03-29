@@ -9,6 +9,7 @@ the share of students reporting depression in each group.
 `);
 
 // Group data by sleepDuration
+
 const grouped = {};
 
 for (const s of students) {
@@ -30,6 +31,7 @@ for (const s of students) {
 }
 
 // Convert grouped data into rows
+
 let rows = Object.values(grouped).map(r => ({
   sleepDuration: r.sleepDuration,
   participants: r.participants,
@@ -37,15 +39,18 @@ let rows = Object.values(grouped).map(r => ({
 }));
 
 // Sort by number of participants (descending)
+
 rows = rows.toSorted((a, b) => b.participants - a.participants);
 
 // TABLE — show full data
+
 tableFromData({
   data: rows,
   numberFormatOptions: { maximumFractionDigits: 3 }
 });
 
 // CHART — only include the two needed fields
+
 const chartRows = rows.map(r => ({
   sleepDuration: r.sleepDuration,
   depressionRate: r.depressionRate

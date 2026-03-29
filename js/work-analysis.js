@@ -28,6 +28,13 @@ Median hours: ${s.median(hours)}
 Std deviation: ${s.standardDeviation(hours).toFixed(2)}
 `);
 
+addMdToPage(`
+The average student spends **${s.mean(hours).toFixed(1)} hours/day** working or studying.
+The median is **${s.median(hours)} hours**, meaning half of students study less than this.
+
+The standard deviation (${s.standardDeviation(hours).toFixed(2)}) shows how spread out
+the workload is across students.
+`);
 
 //  CORRELATION
 

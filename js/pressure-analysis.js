@@ -8,15 +8,18 @@ Academic pressure is numeric, which allows us to compute averages and correlatio
 `);
 
 // Filter out missing values
+
 const validPressure = students.filter(s => 
   s.academicPressure !== null && !isNaN(s.academicPressure)
 );
 
 // Prepare arrays for correlation
+
 const pressure = validPressure.map(s => s.academicPressure);
 const depBinary = validPressure.map(s => s.depression === "Yes" ? 1 : 0);
 
 // Compute correlation
+
 const corrPressure = s.sampleCorrelation(pressure, depBinary);
 
 addMdToPage(`
@@ -24,6 +27,7 @@ addMdToPage(`
 `);
 
 // Group by academic pressure level
+
 const groupedPressure = {};
 
 for (const s of validPressure) {
@@ -41,6 +45,7 @@ for (const s of validPressure) {
 }
 
 // Convert grouped data into rows
+
 let rowsPressure = Object.values(groupedPressure).map(r => ({
   academicPressure: r.level,
   participants: r.participants,
@@ -48,15 +53,18 @@ let rowsPressure = Object.values(groupedPressure).map(r => ({
 }));
 
 // Sort by pressure level
+
 rowsPressure = rowsPressure.toSorted((a, b) => a.academicPressure - b.academicPressure);
 
 // TABLE — show full data
+
 tableFromData({
   data: rowsPressure,
   numberFormatOptions: { maximumFractionDigits: 3 }
 });
 
 // CHART — only include the two needed fields
+
 const chartRows = rowsPressure.map(r => ({
   academicPressure: r.academicPressure,
   depressionRate: r.depressionRate

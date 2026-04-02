@@ -4,30 +4,31 @@ addMdToPage(`# Overview`);
 
 addMdToPage(initialComments);
 
-
-// BASIC SUMMARY
-
-let total = students.length;
-let depressedCount = students.filter(s => s.depression === "Yes").length;
-let depressedPercent = (depressedCount / total) * 100;
+const total = students.length;
+const depressedCount = students.filter(s => s.depression === "Yes").length;
+const depressedPercent = (depressedCount / total) * 100;
 
 addMdToPage(`## Dataset Summary`);
 
 tableFromData({
   data: [
     { metric: "Total students", value: total },
+    { metric: "Depressed (count)", value: depressedCount },
     { metric: "Depressed (%)", value: depressedPercent }
   ],
-  numberFormatOptions: { maximumFractionDigits: 3 }
+  numberFormatOptions: { maximumFractionDigits: 2 }
 });
 
-
-// HELPER: COUNT VALUES
+addMdToPage(`
+Roughly **${depressedPercent.toFixed(1)}%** of students report being depressed.
+This baseline frames the rest of our story: we now ask which conditions are
+associated with higher or lower depression rates.
+`);
 
 function countValues(key) {
-  let counts = {};
-  for (let s of students) {
-    let v = s[key];
+  const counts = {};
+  for (const s of students) {
+    const v = s[key];
     if (!counts[v]) counts[v] = 0;
     counts[v]++;
   }
@@ -54,8 +55,6 @@ addMdToPage(`### Work/study hours`);
 tableFromData({ data: countValues('workStudyHours') });
 
 addMdToPage(`
----
-
-This overview provides a first impression of the population and the main variables.
-Use the **Analysis** section to explore specific factors in more depth.
+These distributions introduce the main characters in our story: how students
+sleep, eat, study, and how pressured they feel.
 `);

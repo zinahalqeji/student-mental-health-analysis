@@ -13,6 +13,8 @@ createMenu('Student Mental Health Analysis', [
   ]},
 
   { name: 'Hypothesis Testing', script: 'hypothesis-testing.js' },
+  {
+    name: 'Correlation & Association', script: 'correlation.js' },
 
   { name: 'Conclusion', script: 'conclusion.js' }
 

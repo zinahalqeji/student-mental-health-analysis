@@ -144,8 +144,9 @@ for (let s of valid) {
   }
 }
 
-
+// ------------------------------------------------------------
 // Transform
+// ------------------------------------------------------------
 let rows = Object.values(grouped).map(r => ({
   Workload: r.group,
   Participants: r.total,
@@ -153,8 +154,9 @@ let rows = Object.values(grouped).map(r => ({
   'Depression Rate (%)': getDepressionRate(r.depressed, r.total)
 }));
 
-
+// ------------------------------------------------------------
 // Force logical order
+// ------------------------------------------------------------
 const order = ['0–2 h', '3–5 h', '6–8 h', '9+ h'];
 
 rows = rows.toSorted((a, b) =>

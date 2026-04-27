@@ -81,7 +81,7 @@ rows = rows.toSorted((a, b) =>
 
 
 // ------------------------------------------------------------
-// Table Output (clean + examiner-friendly)
+// Table Output 
 // ------------------------------------------------------------
 addMdToPage(`## Distribution and Depression Rates`);
 

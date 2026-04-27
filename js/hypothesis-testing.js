@@ -28,7 +28,7 @@ data = filterByGender(data, gender);
 
 
 // ------------------------------------------------------------
-// Helper Functions (CLEAN + REUSABLE)
+// Helper Functions 
 // ------------------------------------------------------------
 function runTTest(a, b) {
   if (a.length < 2 || b.length < 2) return null;
@@ -199,7 +199,7 @@ ${comboChi.rejected ? "Significant relationship" : "Not significant"}
 
 
 // ============================================================
-// FINAL INSIGHT (VG+++ LEVEL)
+// FINAL INSIGHT 
 // ============================================================
 addMdToPage(`
 # Final Interpretation

@@ -134,7 +134,7 @@ ${chi.rejected
 
 
 // ------------------------------------------------------------
-// Stratified Analysis (CONFIDENCE BOOST 🔥)
+// Stratified Analysis 
 // ------------------------------------------------------------
 let workGroups = ['0–2 h', '3–5 h', '6–8 h', '9+ h'];
 
@@ -239,7 +239,7 @@ drawGoogleChart({
 
 
 // ------------------------------------------------------------
-// FINAL INSIGHT (EXAMINER MAGIC ⭐)
+// FINAL INSIGHT 
 // ------------------------------------------------------------
 let strength =
   Math.abs(rSleepDep) < 0.1 ? 'very weak' :

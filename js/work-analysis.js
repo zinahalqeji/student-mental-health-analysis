@@ -103,7 +103,7 @@ slightly more often.
 
 
 // ------------------------------------------------------------
-// Scatter Plot (raw relationship)
+// Scatter Plot
 // ------------------------------------------------------------
 addMdToPage(`## Visualisation: Raw Relationship`);
 
@@ -126,7 +126,7 @@ drawGoogleChart({
 
 
 // ------------------------------------------------------------
-// Grouped Analysis (KEY for interpretation)
+// Grouped Analysis 
 // ------------------------------------------------------------
 let grouped = {};
 
@@ -174,7 +174,7 @@ tableFromData({
 
 
 // ------------------------------------------------------------
-// Chart (clean + powerful)
+// Chart 
 // ------------------------------------------------------------
 addMdToPage(`## Visualisation: Workload Categories`);
 
@@ -197,7 +197,7 @@ drawGoogleChart({
 
 
 // ------------------------------------------------------------
-// Insight Generator (VG+++)
+// Insight Generator 
 // ------------------------------------------------------------
 let highest = rows.reduce((a, b) =>
   a['Depression Rate (%)'] > b['Depression Rate (%)'] ? a : b

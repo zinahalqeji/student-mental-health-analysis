@@ -32,7 +32,7 @@ let filtered = filterByGender(students, gender);
 
 
 // ------------------------------------------------------------
-// Grouping Logic (CLEAN & REUSABLE)
+// Grouping Logic 
 // ------------------------------------------------------------
 let grouped = {};
 
@@ -65,8 +65,9 @@ let rows = Object.values(grouped).map(r => ({
   'Depression Rate (%)': getDepressionRate(r.depressed, r.total)
 }));
 
-
-// Sort logically (by sleep order, not size)
+// ------------------------------------------------------------
+// Sort logically 
+// ------------------------------------------------------------
 const sleepOrder = [
   "1. Less than 5 hours",
   "2. 5-6 hours",
@@ -91,7 +92,7 @@ tableFromData({
 
 
 // ------------------------------------------------------------
-// Chart (clear + professional)
+// Chart 
 // ------------------------------------------------------------
 addMdToPage(`## Visualisation: Depression Rate by Sleep Duration`);
 
@@ -114,7 +115,7 @@ drawGoogleChart({
 
 
 // ------------------------------------------------------------
-// Insight Generator (THIS = VG+++ DIFFERENCE)
+// Insight Generator 
 // ------------------------------------------------------------
 let highest = rows.reduce((a, b) =>
   a['Depression Rate (%)'] > b['Depression Rate (%)'] ? a : b
@@ -126,7 +127,7 @@ let lowest = rows.reduce((a, b) =>
 
 
 // ------------------------------------------------------------
-// Interpretation (Examiner Mode)
+// Interpretation 
 // ------------------------------------------------------------
 addMdToPage(`
 

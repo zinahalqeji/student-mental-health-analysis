@@ -80,7 +80,7 @@ This indicates a ${
 
 
 // ------------------------------------------------------------
-// Grouped Analysis (clean + professional)
+// Grouped Analysis 
 // ------------------------------------------------------------
 let grouped = {};
 
@@ -98,8 +98,9 @@ for (let s of valid) {
   }
 }
 
-
+// ------------------------------------------------------------
 // Transform
+// ------------------------------------------------------------
 let rows = Object.values(grouped).map(r => ({
   Pressure: r.level,
   Participants: r.total,
@@ -121,7 +122,7 @@ tableFromData({
 
 
 // ------------------------------------------------------------
-// Chart (clean + examiner-level)
+// Chart
 // ------------------------------------------------------------
 addMdToPage(`## Visualisation`);
 
@@ -143,7 +144,7 @@ drawGoogleChart({
 
 
 // ------------------------------------------------------------
-// Insight Generator (VG+++ KEY)
+// Insight Generator 
 // ------------------------------------------------------------
 let highest = rows.reduce((a, b) =>
   a['Depression Rate (%)'] > b['Depression Rate (%)'] ? a : b
@@ -155,7 +156,7 @@ let lowest = rows.reduce((a, b) =>
 
 
 // ------------------------------------------------------------
-// Interpretation (Examiner Mode)
+// Interpretation 
 // ------------------------------------------------------------
 addMdToPage(`
 

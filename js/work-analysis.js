@@ -2,15 +2,13 @@ import { students } from './exports/initial-data.js';
 import { filterByGender, getDepressionRate, correlation, getWorkGroup } from './exports/utils.js';
 
 
-// ------------------------------------------------------------
-// Global Filter
-// ------------------------------------------------------------
+
+// dropdown for gender
+
 let gender = addDropdown('Filter by gender:', ['All', 'Male', 'Female']);
 
-
-// ------------------------------------------------------------
 // Title & Context
-// ------------------------------------------------------------
+
 addMdToPage(`# Work/Study Hours Analysis`);
 
 addMdToPage(`
@@ -24,30 +22,27 @@ Unlike sleep, this variable is **continuous**, allowing us to explore:
 `);
 
 
-// ------------------------------------------------------------
+
 // Apply Filter
-// ------------------------------------------------------------
+
 let filtered = filterByGender(students, gender);
 
 
-// ------------------------------------------------------------
 // Clean Data
-// ------------------------------------------------------------
+
 let valid = filtered.filter(s =>
   s.workStudyHours !== null && !isNaN(s.workStudyHours)
 );
 
 
-// ------------------------------------------------------------
 // Arrays
-// ------------------------------------------------------------
+
 let hours = valid.map(s => s.workStudyHours);
 let depression = valid.map(s => s.depression === "Yes" ? 1 : 0);
 
 
-// ------------------------------------------------------------
 // Normality Test
-// ------------------------------------------------------------
+
 let normalTest = stdLib.stats.shapiroWilkTest(hours);
 
 addMdToPage(`## Normality Test (Shapiro–Wilk)`);
@@ -62,10 +57,8 @@ ${
 }
 `);
 
-
-// ------------------------------------------------------------
 // Descriptive Statistics
-// ------------------------------------------------------------
+
 addMdToPage(`## Descriptive Statistics`);
 
 tableFromData({
@@ -78,9 +71,8 @@ tableFromData({
 });
 
 
-// ------------------------------------------------------------
 // Correlation
-// ------------------------------------------------------------
+
 let r = correlation(hours, depression);
 
 addMdToPage(`
@@ -102,9 +94,8 @@ slightly more often.
 `);
 
 
-// ------------------------------------------------------------
 // Scatter Plot
-// ------------------------------------------------------------
+
 addMdToPage(`## Visualisation: Raw Relationship`);
 
 let scatterData = valid.map(s => ({
@@ -124,10 +115,8 @@ drawGoogleChart({
   }
 });
 
-
-// ------------------------------------------------------------
 // Grouped Analysis 
-// ------------------------------------------------------------
+
 let grouped = {};
 
 for (let s of valid) {
@@ -144,9 +133,8 @@ for (let s of valid) {
   }
 }
 
-// ------------------------------------------------------------
 // Transform
-// ------------------------------------------------------------
+
 let rows = Object.values(grouped).map(r => ({
   Workload: r.group,
   Participants: r.total,
@@ -154,9 +142,9 @@ let rows = Object.values(grouped).map(r => ({
   'Depression Rate (%)': getDepressionRate(r.depressed, r.total)
 }));
 
-// ------------------------------------------------------------
+
 // Force logical order
-// ------------------------------------------------------------
+
 const order = ['0–2 h', '3–5 h', '6–8 h', '9+ h'];
 
 rows = rows.toSorted((a, b) =>
@@ -164,9 +152,8 @@ rows = rows.toSorted((a, b) =>
 );
 
 
-// ------------------------------------------------------------
 // Table Output
-// ------------------------------------------------------------
+
 addMdToPage(`## Depression Rate by Workload Category`);
 
 tableFromData({
@@ -175,9 +162,9 @@ tableFromData({
 });
 
 
-// ------------------------------------------------------------
+
 // Chart 
-// ------------------------------------------------------------
+
 addMdToPage(`## Visualisation: Workload Categories`);
 
 let chartData = rows.map(r => ({
@@ -198,9 +185,8 @@ drawGoogleChart({
 });
 
 
-// ------------------------------------------------------------
 // Insight Generator 
-// ------------------------------------------------------------
+
 let highest = rows.reduce((a, b) =>
   a['Depression Rate (%)'] > b['Depression Rate (%)'] ? a : b
 );
@@ -210,9 +196,8 @@ let lowest = rows.reduce((a, b) =>
 );
 
 
-// ------------------------------------------------------------
 // Interpretation
-// ------------------------------------------------------------
+
 addMdToPage(`
 
 # Key Insights

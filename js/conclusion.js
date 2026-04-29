@@ -9,10 +9,8 @@ By combining **descriptive statistics**, **correlation analysis**, and
 into student mental health.
 `);
 
-
-// ------------------------------------------------------------
 // KEY FINDINGS TABLE 
-// ------------------------------------------------------------
+
 tableFromData({
   data: [
     {
@@ -39,9 +37,8 @@ tableFromData({
 });
 
 
-// ------------------------------------------------------------
 // FINAL STORY
-// ------------------------------------------------------------
+
 drawGoogleChart({
   type: 'ColumnChart',
   data: [
@@ -58,10 +55,8 @@ drawGoogleChart({
   }
 });
 
-
-// ------------------------------------------------------------
 // KEY INSIGHTS
-// ------------------------------------------------------------
+
 addMdToPage(`
 ## Key Insights
 
@@ -81,10 +76,8 @@ These findings highlight that student depression is not driven by a single cause
 but rather by the **interaction of multiple stress factors**.
 `);
 
-
-// ------------------------------------------------------------
 // LIMITATIONS 
-// ------------------------------------------------------------
+
 addMdToPage(`
 ## Limitations
 
@@ -96,10 +89,8 @@ Despite these limitations, the consistency of patterns across multiple methods
 (correlation, chi-square, and hypothesis testing) strengthens the reliability of the findings.
 `);
 
-
-// ------------------------------------------------------------
 // FINAL INTERPRETATION 
-// ------------------------------------------------------------
+
 addMdToPage(`
 ## Final Interpretation
 
@@ -114,10 +105,8 @@ single variable, but instead adopt a **holistic approach** that addresses multip
 dimensions of student life.
 `);
 
-
-// ------------------------------------------------------------
 // FUTURE WORK
-// ------------------------------------------------------------
+
 addMdToPage(`
 ## Future Work
 
@@ -131,10 +120,8 @@ Such approaches would provide a more comprehensive understanding of the dynamics
 of student well-being.
 `);
 
-
-// ------------------------------------------------------------
 //  CLOSING LINE 
-// ------------------------------------------------------------
+
 addMdToPage(`
 ---
 

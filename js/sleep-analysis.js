@@ -2,15 +2,13 @@ import { students } from './exports/initial-data.js';
 import { filterByGender, getDepressionRate } from './exports/utils.js';
 
 
-// ------------------------------------------------------------
-// Global Filter (works across ALL pages)
-// ------------------------------------------------------------
+// dropdown for gender
+
 let gender = addDropdown('Filter by gender:', ['All', 'Male', 'Female']);
 
 
-// ------------------------------------------------------------
 // Title & Context
-// ------------------------------------------------------------
+
 addMdToPage(`# Sleep Analysis`);
 
 addMdToPage(`
@@ -25,15 +23,13 @@ both physical and mental well-being.
 `);
 
 
-// ------------------------------------------------------------
 // Apply Global Filter
-// ------------------------------------------------------------
+
 let filtered = filterByGender(students, gender);
 
 
-// ------------------------------------------------------------
 // Grouping Logic 
-// ------------------------------------------------------------
+
 let grouped = {};
 
 for (let s of filtered) {
@@ -55,9 +51,8 @@ for (let s of filtered) {
 }
 
 
-// ------------------------------------------------------------
 // Transform Data
-// ------------------------------------------------------------
+
 let rows = Object.values(grouped).map(r => ({
   Sleep: r.sleepDuration,
   Participants: r.total,
@@ -65,9 +60,8 @@ let rows = Object.values(grouped).map(r => ({
   'Depression Rate (%)': getDepressionRate(r.depressed, r.total)
 }));
 
-// ------------------------------------------------------------
 // Sort logically 
-// ------------------------------------------------------------
+
 const sleepOrder = [
   "1. Less than 5 hours",
   "2. 5-6 hours",
@@ -80,9 +74,8 @@ rows = rows.toSorted((a, b) =>
 );
 
 
-// ------------------------------------------------------------
 // Table Output 
-// ------------------------------------------------------------
+
 addMdToPage(`## Distribution and Depression Rates`);
 
 tableFromData({
@@ -91,9 +84,8 @@ tableFromData({
 });
 
 
-// ------------------------------------------------------------
 // Chart 
-// ------------------------------------------------------------
+
 addMdToPage(`## Visualisation: Depression Rate by Sleep Duration`);
 
 let chartData = rows.map(r => ({
@@ -113,10 +105,8 @@ drawGoogleChart({
   }
 });
 
-
-// ------------------------------------------------------------
 // Insight Generator 
-// ------------------------------------------------------------
+
 let highest = rows.reduce((a, b) =>
   a['Depression Rate (%)'] > b['Depression Rate (%)'] ? a : b
 );
@@ -125,10 +115,8 @@ let lowest = rows.reduce((a, b) =>
   a['Depression Rate (%)'] < b['Depression Rate (%)'] ? a : b
 );
 
-
-// ------------------------------------------------------------
 // Interpretation 
-// ------------------------------------------------------------
+
 addMdToPage(`
 
 # Key Insights

@@ -2,15 +2,14 @@ import { students } from './exports/initial-data.js';
 import { filterByGender, getDepressionRate, correlation } from './exports/utils.js';
 
 
-// ------------------------------------------------------------
-// Global Filter
-// ------------------------------------------------------------
+
+// dropdown for gender
+
 let gender = addDropdown('Filter by gender:', ['All', 'Male', 'Female']);
 
 
-// ------------------------------------------------------------
 // Title & Context
-// ------------------------------------------------------------
+
 addMdToPage(`# Academic Pressure & Depression`);
 
 addMdToPage(`
@@ -22,30 +21,26 @@ with **higher depression rates**, using both descriptive statistics and correlat
 `);
 
 
-// ------------------------------------------------------------
 // Apply Filter
-// ------------------------------------------------------------
+
 let filtered = filterByGender(students, gender);
 
 
-// ------------------------------------------------------------
 // Clean Data
-// ------------------------------------------------------------
+
 let valid = filtered.filter(s =>
   s.academicPressure !== null && !isNaN(s.academicPressure)
 );
 
 
-// ------------------------------------------------------------
 // Arrays for Analysis
-// ------------------------------------------------------------
+
 let pressure = valid.map(s => s.academicPressure);
 let depression = valid.map(s => s.depression === "Yes" ? 1 : 0);
 
 
-// ------------------------------------------------------------
 // Descriptive Statistics
-// ------------------------------------------------------------
+
 addMdToPage(`## Descriptive Statistics`);
 
 tableFromData({
@@ -58,9 +53,8 @@ tableFromData({
 });
 
 
-// ------------------------------------------------------------
 // Correlation
-// ------------------------------------------------------------
+
 let r = correlation(pressure, depression);
 
 addMdToPage(`
@@ -79,9 +73,8 @@ This indicates a ${
 `);
 
 
-// ------------------------------------------------------------
 // Grouped Analysis 
-// ------------------------------------------------------------
+
 let grouped = {};
 
 for (let s of valid) {
@@ -98,9 +91,8 @@ for (let s of valid) {
   }
 }
 
-// ------------------------------------------------------------
 // Transform
-// ------------------------------------------------------------
+
 let rows = Object.values(grouped).map(r => ({
   Pressure: r.level,
   Participants: r.total,
@@ -110,9 +102,8 @@ let rows = Object.values(grouped).map(r => ({
 .toSorted((a, b) => a.Pressure - b.Pressure);
 
 
-// ------------------------------------------------------------
 // Table Output
-// ------------------------------------------------------------
+
 addMdToPage(`## Depression Rate by Academic Pressure`);
 
 tableFromData({
@@ -121,9 +112,8 @@ tableFromData({
 });
 
 
-// ------------------------------------------------------------
 // Chart
-// ------------------------------------------------------------
+
 addMdToPage(`## Visualisation`);
 
 let chartData = rows.map(r => ({
@@ -143,9 +133,8 @@ drawGoogleChart({
 });
 
 
-// ------------------------------------------------------------
 // Insight Generator 
-// ------------------------------------------------------------
+
 let highest = rows.reduce((a, b) =>
   a['Depression Rate (%)'] > b['Depression Rate (%)'] ? a : b
 );
@@ -155,9 +144,8 @@ let lowest = rows.reduce((a, b) =>
 );
 
 
-// ------------------------------------------------------------
 // Interpretation 
-// ------------------------------------------------------------
+
 addMdToPage(`
 
 # Key Insights

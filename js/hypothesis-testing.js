@@ -2,9 +2,8 @@ import { students } from './exports/initial-data.js';
 import { filterByGender, toBinaryDepression } from './exports/utils.js';
 
 
-// ------------------------------------------------------------
 // Title
-// ------------------------------------------------------------
+
 addMdToPage(`# Hypothesis Testing`);
 
 addMdToPage(`
@@ -17,19 +16,15 @@ We use:
 The chi-square test is the **primary basis for conclusions**.
 `);
 
-
-// ------------------------------------------------------------
 // Global Gender Filter
-// ------------------------------------------------------------
+
 let gender = addDropdown('Filter by gender:', ['All', 'Male', 'Female']);
 
 let data = students.filter(d => d.sleepDuration !== 'Others');
 data = filterByGender(data, gender);
 
-
-// ------------------------------------------------------------
 // Helper Functions 
-// ------------------------------------------------------------
+
 function runTTest(a, b) {
   if (a.length < 2 || b.length < 2) return null;
 
@@ -61,10 +56,8 @@ function buildContingency(a, b) {
   return [count(a), count(b)];
 }
 
-
-// ============================================================
 // HYPOTHESIS 1: SLEEP
-// ============================================================
+
 addMdToPage(`## Hypothesis 1: Sleep Duration and Depression
 
 **H₀:** Independent  
@@ -109,10 +102,8 @@ addMdToPage(`
 ${sleepChi.rejected ? "Reject H₀" : "Fail to reject H₀"}
 `);
 
-
-// ============================================================
 // HYPOTHESIS 2: ACADEMIC PRESSURE
-// ============================================================
+
 addMdToPage(`## Hypothesis 2: Academic Pressure and Depression`);
 
 let lowAP = buildBinary(
@@ -151,10 +142,8 @@ Chi-square p = ${apChi.pValue.toFixed(4)} →
 ${apChi.rejected ? "Significant relationship" : "No strong evidence"}
 `);
 
-
-// ============================================================
 // HYPOTHESIS 3: COMBINED FACTORS
-// ============================================================
+
 addMdToPage(`## Hypothesis 3: Combined Risk Factors`);
 
 let highRisk = buildBinary(
@@ -198,9 +187,8 @@ ${comboChi.rejected ? "Significant relationship" : "Not significant"}
 `);
 
 
-// ============================================================
 // FINAL INSIGHT 
-// ============================================================
+
 addMdToPage(`
 # Final Interpretation
 

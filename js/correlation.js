@@ -33,22 +33,18 @@ independently to depression risk and how strongly each factor matters.
 `);
 
 
-// ------------------------------------------------------------
-// Global Gender Filter (ONE SOURCE)
-// ------------------------------------------------------------
+//dropdown for gender
+
 let gender = addDropdown('Filter by gender:', ['All', 'Male', 'Female']);
 
 
-// ------------------------------------------------------------
 // Filter Data 
-// ------------------------------------------------------------
+
 let data = students.filter(d => d.sleepDuration !== 'Others');
 data = filterByGender(data, gender);
 
-
-// ------------------------------------------------------------
 // Sleep Mapping (Ordinal → Numeric)
-// ------------------------------------------------------------
+
 const sleepMap = {
   '1. Less than 5 hours': 1,
   '2. 5-6 hours': 2,
@@ -56,10 +52,8 @@ const sleepMap = {
   '4. More than 8 hours': 4
 };
 
-
-// ------------------------------------------------------------
 // Build Arrays (UTILS)
-// ------------------------------------------------------------
+
 let { x: hoursArr, y: depressionArr } =
   buildArrays(data, 'workStudyHours');
 
@@ -74,18 +68,14 @@ for (let row of data) {
   }
 }
 
-
-// ------------------------------------------------------------
 // Correlations
-// ------------------------------------------------------------
+
 let rHoursDep = correlation(hoursArr, depressionArr);
 let rSleepDep = correlation(sleepArr, depArr);
 let rHoursSleep = correlation(hoursArr, sleepArr);
 
-
-// ------------------------------------------------------------
 // Output: Correlation Table
-// ------------------------------------------------------------
+
 addMdToPage(`## Pairwise Correlations`);
 
 tableFromData({
@@ -97,9 +87,8 @@ tableFromData({
 });
 
 
-// ------------------------------------------------------------
 // Chi-square (Sleep × Depression)
-// ------------------------------------------------------------
+
 let sleepSummary = getDepressionSummary(data, 'sleepDuration');
 sleepSummary = sortSleep(sleepSummary, 'category');
 
@@ -111,9 +100,8 @@ let contingency = sleepSummary.map(r => [
 let chi = stdLib.stats.chi2test(contingency);
 
 
-// ------------------------------------------------------------
 // Table Output
-// ------------------------------------------------------------
+
 tableFromData({
   data: sleepSummary.map(r => ({
     Sleep: cleanSleepLabel(r.category),
@@ -132,10 +120,8 @@ ${chi.rejected
   : "❌ No statistically significant relationship"}
 `);
 
-
-// ------------------------------------------------------------
 // Stratified Analysis 
-// ------------------------------------------------------------
+
 let workGroups = ['0–2 h', '3–5 h', '6–8 h', '9+ h'];
 
 let stratified = workGroups.map(group => {
@@ -166,9 +152,8 @@ addMdToPage(`## Stratified Analysis (Control for Work Hours)`);
 tableFromData({ data: stratified });
 
 
-// ------------------------------------------------------------
 // Partial Correlation
-// ------------------------------------------------------------
+
 function partialCorrelation(x, y, z) {
   const rXY = correlation(x, y);
   const rXZ = correlation(x, z);
@@ -180,10 +165,8 @@ function partialCorrelation(x, y, z) {
 
 let rPartial = partialCorrelation(sleepArr, depArr, hoursArr);
 
+// Visual 1: Sleep - Depression
 
-// ------------------------------------------------------------
-// Visual 1: Sleep → Depression
-// ------------------------------------------------------------
 let sleepRates = getDepressionSummary(data, 'sleepDuration');
 
 drawGoogleChart({
@@ -202,10 +185,8 @@ drawGoogleChart({
   }
 });
 
-
-// ------------------------------------------------------------
 // Visual 2: Interaction (Sleep × Workload)
-// ------------------------------------------------------------
+
 let grouped = {};
 
 for (let row of data) {
@@ -237,10 +218,8 @@ drawGoogleChart({
   }
 });
 
-
-// ------------------------------------------------------------
 // FINAL INSIGHT 
-// ------------------------------------------------------------
+
 let strength =
   Math.abs(rSleepDep) < 0.1 ? 'very weak' :
   Math.abs(rSleepDep) < 0.3 ? 'weak' :
